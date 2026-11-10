@@ -111,7 +111,8 @@ img { max-width: 100%; display: block; }
 .count { color: var(--muted); margin: 8px 0 20px; }
 
 /* ===== صفحة الدولة ===== */
-.back { margin-bottom: 28px; }
+/* الرابط عنصر inline، والـ margin العمودي مبيشتغلش عليه. لازم inline-block */
+.back { display: inline-block; margin-bottom: 28px; }
 .details { display: grid; gap: 32px; grid-template-columns: 1fr; align-items: start; }
 @media (min-width: 860px) { .details { grid-template-columns: 1fr 1fr; } }
 .details img { width: 100%; border-radius: 12px; box-shadow: var(--shadow); }
