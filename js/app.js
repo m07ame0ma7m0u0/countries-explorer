@@ -41,12 +41,20 @@ function visibleCountries() {
   return list;
 }
 
+// في فلتر شغال؟ بنستخدمها عشان نظهر زرار «مسح الفلاتر» بس وقت الحاجة
+function hasFilters() {
+  const active = [state.query.trim() !== "", state.region !== "all", state.sort !== "name"];
+  active.push(state.favOnly);
+  return active.some(Boolean);
+}
+
 function renderGrid() {
   const list = visibleCountries();
   document.querySelector("#grid").innerHTML = list.map((c) => cardHTML(c, state.favorites.has(c.code))).join("");
   document.querySelector("#count").textContent = list.length
     ? `${list.length} دولة`
     : "مفيش دول بالشروط دي. جرّب كلمة تانية أو شيل الفلتر.";
+  document.querySelector("#reset").hidden = !hasFilters();
 }
 
 // بنستنى المستخدم يبطّل كتابة 250 مللي ثانية قبل ما نفلتر (Debounce)
@@ -73,6 +81,13 @@ function showList() {
   const favOnly = document.querySelector("#fav-only");
   favOnly.checked = state.favOnly;
   favOnly.addEventListener("change", () => { state.favOnly = favOnly.checked; renderGrid(); });
+  document.querySelector("#reset").addEventListener("click", () => {
+    state.query = "";
+    state.region = "all";
+    state.sort = "name";
+    state.favOnly = false;
+    showList(); // بيرسم الأدوات من جديد بالقيم الافتراضية
+  });
   renderGrid();
 }
 

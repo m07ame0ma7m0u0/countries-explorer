@@ -61,6 +61,7 @@ export function controlsHTML(regions) {
         <option value="area">الأكبر مساحة</option>
       </select>
       <label class="toggle"><input type="checkbox" id="fav-only"> المفضلة بس</label>
+      <button type="button" class="btn" id="reset" hidden>مسح الفلاتر</button>
     </div>
     <p class="count" id="count" aria-live="polite"></p>
     <ul class="grid" id="grid"></ul>`;
